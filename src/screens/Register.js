@@ -19,6 +19,12 @@ class Register extends Component{
             <View>
             <TextInput
             style={styles.field}
+            keyboardType='default'
+            placeholder='username'
+            onChangeText={ text => this.setState({username: text})}
+            />
+            <TextInput
+            style={styles.field}
             keyboardType='email-address'
             placeholder='email'
             onChangeText={ text => this.setState({email: text})}
@@ -31,7 +37,7 @@ class Register extends Component{
             onChangeText={ text => this.setState({password: text})}
             />
              <Text style={styles.error}>{this.props.error}</Text>
-            <TouchableOpacity onPress={() => this.props.register(this.state.email, this.state.password)} style={styles.boton}>
+            <TouchableOpacity onPress={() => this.props.register(this.state.email, this.state.password, this.state.username)} style={styles.boton}>
                 <Text style={styles.textoBoton}>Register</Text>
             </TouchableOpacity>
             </View>
