@@ -9,6 +9,7 @@ import { Component } from "react";
 import { auth } from "../Firebase/config";
 import MiPerfil from "../screens/miPerfil";
 import Postform from "../screens/Postform"
+import Buscador from "../screens/Buscador"
 
 const Drawer = createDrawerNavigator()
 
@@ -65,6 +66,7 @@ class Menu extends Component{
                         <Drawer.Screen name='Home' component={()=><Home/>}/>
                         <Drawer.Screen name='Mi Perfil' component={()=><MiPerfil dataUsuario={this.state.dataUser} logout={()=>this.logout()}/>} />
                         <Drawer.Screen name="New Post" component={(drawerProps)=> <Postform drawerProps={drawerProps}/>}/>
+                        <Drawer.Screen name='Buscar' component={()=><Buscador/>}/>
                     </Drawer.Navigator> 
                 </NavigationContainer>
             )
