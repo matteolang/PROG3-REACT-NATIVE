@@ -8,7 +8,9 @@ class MiPerfil extends Component {
         super(props)
         this.state = {
             posteos: [],
-            postsPropios: []
+            postsPropios: [],
+            usuarios: [],
+            usuarioActual: {}
         }
 
     }
@@ -24,6 +26,17 @@ class MiPerfil extends Component {
             }
 
         )
+        db.collection('users').onSnapshot(
+            docs => {
+                let usuarios = []
+                docs.forEach(doc => 
+                    usuarios.push({id: doc.id, data: doc.data()})
+                );
+                this.setState({usuarios: usuarios})
+                let nombreUsuario = this.state.usuarios.filter( usuario => this.props.dataUsuario.email == usuario.data.email )
+                this.setState({usuarioActual: nombreUsuario[0].data})
+            }
+        )
         
     }
 
@@ -31,7 +44,7 @@ class MiPerfil extends Component {
     render(){
         return (
             <View>
-        <Text>USERNAME</Text>
+        <Text>{this.state.usuarioActual.username}</Text>
         <Text>Email: {this.props.dataUsuario.email}</Text>
 
         <Text>Cantidad de posteos: {this.state.postsPropios.length}</Text>
