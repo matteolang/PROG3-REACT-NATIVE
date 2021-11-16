@@ -18,11 +18,9 @@ class MiPerfil extends Component {
                 let posts = []
                 docs.forEach(doc =>  posts.push({ id: doc.id , data: doc.data()}))
                 this.setState({posteos: posts})
-                console.log(this.props.dataUsuario.email);
-                console.log(this.state.posteos[0].data.owner);
                 let posteosTotal = this.state.posteos.filter(post => this.props.dataUsuario.email == post.data.owner)
-                console.log(posteosTotal);
-                this.setState({postsPropios: posteosTotal})
+                let ordenados = posteosTotal.sort((a, b) => b.data.createdAt - a.data.createdAt)
+                this.setState({postsPropios: ordenados})
             }
 
         )

@@ -17,7 +17,9 @@ class Home extends Component{
             docs =>{
                 let posts = []
                 docs.forEach(doc =>  posts.push({ id: doc.id , data: doc.data()}))
-                this.setState({posteos: posts})
+                
+                let ordenados = posts.sort((a, b) => b.data.createdAt - a.data.createdAt)
+                this.setState({posteos: ordenados})
             }
 
         )
