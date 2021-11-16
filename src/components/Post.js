@@ -10,7 +10,9 @@ class Post extends Component{
            likes: 0,
            myLike:false,
            showModal: false,
-           comentario: ""
+           comentario: "",
+           usuarios: [],
+           usuarioActual: []
         }
     }
     componentDidMount(){
@@ -20,6 +22,17 @@ class Post extends Component{
                 myLike: this.props.postData.data.likes.includes(auth.currentUser.email)
             })
         }
+        db.collection('users').onSnapshot(
+            docs => {
+                let usuarios = []
+                docs.forEach(doc => 
+                    usuarios.push({id: doc.id, data: doc.data()})
+                );
+                this.setState({usuarios: usuarios})
+                let nombreUsuario = this.state.usuarios.filter( usuario => this.props.postData.data.owner == usuario.data.email )
+                this.setState({usuarioActual: nombreUsuario})
+            }
+        )
     }
     
     darLike(){
@@ -67,7 +80,7 @@ class Post extends Component{
              <Text>Texto del post: {this.props.postData.data.texto}</Text>
              <Image  style={styles.image} source={{uri: this.props.postData.data.foto}}/>
              
-             <Text>user: {this.props.postData.data.owner} </Text>  
+             <Text>user: {this.props.postData.data.owner}, {this.state.usuarioActual[0].username} </Text>  
                          
             {this.state.myLike == false ? <TouchableOpacity onPress={()=>this.darLike()}>
                  <Text>Me gusta</Text>
