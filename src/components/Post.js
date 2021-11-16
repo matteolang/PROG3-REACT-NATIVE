@@ -30,7 +30,8 @@ class Post extends Component{
                 );
                 this.setState({usuarios: usuarios})
                 let nombreUsuario = this.state.usuarios.filter( usuario => this.props.postData.data.owner == usuario.data.email )
-                this.setState({usuarioActual: nombreUsuario})
+                
+                this.setState({usuarioActual: nombreUsuario[0].data.username})
             }
         )
     }
@@ -77,11 +78,10 @@ class Post extends Component{
     render(){
         return(
             <View style={styles.contanier}>
-             <Text>Texto del post: {this.props.postData.data.texto}</Text>
+            <Text style={styles.username}>{this.state.usuarioActual} </Text>  
              <Image  style={styles.image} source={{uri: this.props.postData.data.foto}}/>
              
-             <Text>user: {this.props.postData.data.owner}, {this.state.usuarioActual[0].username} </Text>  
-                         
+             <Text>Texto del post: {this.props.postData.data.texto}</Text>
             {this.state.myLike == false ? <TouchableOpacity onPress={()=>this.darLike()}>
                  <Text>Me gusta</Text>
              </TouchableOpacity> : <TouchableOpacity onPress={()=>this.sacarLike()}>
@@ -150,6 +150,9 @@ const styles = StyleSheet.create({
         padding: 5,
         alignSelf: "center",
         height: 400
+    },
+    username: {
+        fontWeight: "bold"
     }
 })
 
