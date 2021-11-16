@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Text, View, TouchableOpacity, Touchable, TextInput} from "react-native"
 import { StyleSheet} from "react-native"
+import { auth, db } from "../Firebase/config";
 
 class Register extends Component{
     constructor(props){
@@ -13,6 +14,22 @@ class Register extends Component{
             password: ""       
         }
     }
+    submitUser(){
+        db.collection('users').add({
+            email: this.state.email,
+            username: this.state.username,
+            createdAt: Date.now(),
+        })
+        .then(()=>{
+
+            this.props.register(this.state.email, this.state.password)
+            this.setState({email: "" ,username: "",password: ""})
+            this.props.drawerProps.navigation.navigate('Login')
+        }
+        )
+        .catch(error => console.log(error))
+    }
+    
 
     render(){
         return(
@@ -37,7 +54,7 @@ class Register extends Component{
             onChangeText={ text => this.setState({password: text})}
             />
              <Text style={styles.error}>{this.props.error}</Text>
-            <TouchableOpacity onPress={() => this.props.register(this.state.email, this.state.password, this.state.username)} style={styles.boton}>
+            <TouchableOpacity onPress={()=> this.submitUser()}  style={styles.boton} >
                 <Text style={styles.textoBoton}>Register</Text>
             </TouchableOpacity>
             </View>

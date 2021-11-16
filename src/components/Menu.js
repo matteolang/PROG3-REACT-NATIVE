@@ -11,6 +11,7 @@ import MiPerfil from "../screens/miPerfil";
 import Postform from "../screens/Postform"
 import Buscador from "../screens/Buscador"
 
+
 const Drawer = createDrawerNavigator()
 
 class Menu extends Component{
@@ -75,7 +76,7 @@ class Menu extends Component{
                     <NavigationContainer>
                         <Drawer.Navigator>
                             <Drawer.Screen name='Login' component={()=><Login login={(email, pass)=>this.login(email, pass)} error={this.state.dataErrorLogin}/>}/>
-                            <Drawer.Screen name='Register' component={()=><Register register={(email, pass)=>this.register(email, pass)} error={this.state.dataErrorRegister}/>}/>
+                            <Drawer.Screen name='Register' component={(drawerProps)=> <Register drawerProps={drawerProps} register={(email, pass)=>this.register(email, pass)} error={this.state.dataErrorRegister}/>}/>
                         </Drawer.Navigator> 
                     </NavigationContainer>
                 )
