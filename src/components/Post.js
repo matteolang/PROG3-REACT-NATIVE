@@ -12,10 +12,14 @@ class Post extends Component{
            showModal: false,
            comentario: "",
            usuarios: [],
-           usuarioActual: []
+           usuarioActual: [],
+           postPropio: false
         }
     }
     componentDidMount(){
+        if(auth.currentUser.email == this.props.postData.data.owner){
+            this.setState({postPropio: true})
+        }
         if(this.props.postData.data.likes){
             this.setState({
                 likes: this.props.postData.data.likes.length,
@@ -74,11 +78,28 @@ class Post extends Component{
         }
         )
     }
+    borrarPost(){
+        if(auth.currentUser.email == this.props.postData.data.owner){
+            this.setState({postPropio: true})
+            alert("Mira que estas borrando el post.")
+            
+            db.collection("posts").doc(this.props.postData.id).delete()
+            .then(() => {
+            }).catch((error) => {
+                console.error("Error removing document: ", error);
+            });
+        }
+        
+        
+       
+    }
 
     render(){
         return(
             <View style={styles.contanier}>
             <Text style={styles.username}>{this.state.usuarioActual} </Text>  
+            {this.state.postPropio ?   <TouchableOpacity onPress={()=> this.borrarPost()}><Text>X</Text></TouchableOpacity> : <Text></Text>}
+ 
              <Image  style={styles.image} source={{uri: this.props.postData.data.foto}}/>
              
              <Text>Texto del post: {this.props.postData.data.texto}</Text>

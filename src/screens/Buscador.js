@@ -30,7 +30,6 @@ class Buscador extends Component{
         db.collection('posts').onSnapshot(
             docs =>{  
                 let posteosBuscados = this.state.posteos.filter(post => post.data.owner.toLowerCase().includes(this.state.buscado.toLowerCase()) )
-                console.log(posteosBuscados);
                 if(posteosBuscados.length > 0){
                 this.setState({posteosBuscados: posteosBuscados, resultados: true})
                 } else {

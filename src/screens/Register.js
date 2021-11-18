@@ -11,9 +11,13 @@ class Register extends Component{
             loggedIn: false, 
             error: '',
             username: "",
-            password: ""       
+            password: "",
+            botonHabilitado: true    
         }
     }
+    
+    
+
     submitUser(){
         db.collection('users').add({
             email: this.state.email,
@@ -21,7 +25,7 @@ class Register extends Component{
             createdAt: Date.now(),
         })
         .then(()=>{
-
+            
             this.props.register(this.state.email, this.state.password)
             this.setState({email: "" ,username: "",password: ""})
             this.props.drawerProps.navigation.navigate('Login')
@@ -54,9 +58,12 @@ class Register extends Component{
             onChangeText={ text => this.setState({password: text})}
             />
              <Text style={styles.error}>{this.props.error}</Text>
-            <TouchableOpacity onPress={()=> this.submitUser()}  style={styles.boton} >
+             { this.state.botonHabilitado ? 
+             <TouchableOpacity onPress={()=> this.submitUser()}  style={styles.boton} >
                 <Text style={styles.textoBoton}>Register</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>: <TouchableOpacity  style={styles.botonNo} >
+                <Text style={styles.textoBoton}>Register</Text>
+            </TouchableOpacity>}
             </View>
         )
     }
@@ -92,6 +99,16 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         borderColor: "#28a745"
 
+    },
+    botonNo: {
+        backgroundColor: "grey",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 4 ,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black"
     },
     textoBoton: {
         color: "white"
