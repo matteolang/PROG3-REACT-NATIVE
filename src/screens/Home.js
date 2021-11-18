@@ -27,7 +27,7 @@ class Home extends Component{
  
     render(){
         return(
-            <View >
+            <View style={styles.posts}>
         <FlatList data={this.state.posteos} keyExtractor={ post => post.id} renderItem={ ({item}) => <Post postData={item}>{item.data.texto}</Post>}/>
 
             </View>
@@ -59,6 +59,10 @@ const styles = StyleSheet.create({
     texto: {
         fontWeight: "bold"
     },
+
+    posts: {
+        margin: 5
+    }
     
 })
 export default Home;

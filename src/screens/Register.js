@@ -84,7 +84,9 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         borderRadius: 6,
-        marginVertical: 15
+        marginVertical: 15,
+        marginLeft: 5,
+        marginRight: 5,
     },
     error: {
         color: 'red'
@@ -97,7 +99,10 @@ const styles = StyleSheet.create({
         borderRadius: 4 ,
         borderWidth: 1,
         borderStyle: "solid",
-        borderColor: "#28a745"
+        borderColor: "#28a745",
+        marginLeft: 5,
+        marginRight: 5,
+        marginVertical: 15,
 
     },
     botonNo: {

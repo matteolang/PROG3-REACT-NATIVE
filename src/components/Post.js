@@ -97,22 +97,25 @@ class Post extends Component{
     render(){
         return(
             <View style={styles.contanier}>
+                <Text style={styles.parteDeArriba}>
             <Text style={styles.username}>{this.state.usuarioActual} </Text>  
-            {this.state.postPropio ?   <TouchableOpacity onPress={()=> this.borrarPost()}><Text>X</Text></TouchableOpacity> : <Text></Text>}
- 
+            {this.state.postPropio ?   <TouchableOpacity onPress={()=> this.borrarPost()}><Text style={styles.cruz}>X</Text></TouchableOpacity> : <Text></Text>}
+            </Text>
+
              <Image  style={styles.image} source={{uri: this.props.postData.data.foto}}/>
-             
-             <Text>Texto del post: {this.props.postData.data.texto}</Text>
+             <View style={styles.textosPost}>
+             <Text><Text style={styles.usernamePost}>{this.state.usuarioActual}:</Text> {this.props.postData.data.texto}</Text>
+             <Text style={styles.bloqueLikes}>
             {this.state.myLike == false ? <TouchableOpacity onPress={()=>this.darLike()}>
-                 <Text>Me gusta</Text>
+                 <Text style={styles.botonMeGusta}>Me gusta</Text>
              </TouchableOpacity> : <TouchableOpacity onPress={()=>this.sacarLike()}>
-                 <Text>No me gusta</Text>
+                 <Text style={styles.botonMeGusta}>No me gusta</Text>
              </TouchableOpacity> }
              
             {this.props.postData.data.likes.length == 0 ? <Text>No le gusta a nadie</Text>: 
             this.props.postData.data.likes.length == 1 ? <Text>Solo le gusta a {this.props.postData.data.likes[0]}</Text> : <Text> Le gusta a {this.props.postData.data.likes[0]} y a {this.props.postData.data.likes.length - 1} personas más </Text>}
             
-
+            </Text>
              
              { this.state.showModal ?  
              <Modal style={styles.modalContainer} visible={this.state.showModal} animationType="slide" transparent={false}>
@@ -128,9 +131,10 @@ class Post extends Component{
             </Modal>
               :
                 <TouchableOpacity onPress={()=> this.showModal()}>
-                 {this.props.postData.data.comentarios ? this.props.postData.data.comentarios.length == 1 ? <Text>Ver el único comentario</Text> : <Text>Ver los {this.props.postData.data.comentarios.length} comentarios</Text>: <Text>No hay comentarios aún</Text>}
+                 {this.props.postData.data.comentarios ? this.props.postData.data.comentarios.length == 1 ? <Text style={styles.botonMeGusta}>Ver el único comentario</Text> : <Text style={styles.botonMeGusta}>Ver los {this.props.postData.data.comentarios.length} comentarios</Text>: <Text style={styles.botonMeGusta}>No hay comentarios aún</Text>}
                 </TouchableOpacity>
-             }       
+             }  
+             </View>     
             </View>
         )
     }
@@ -164,16 +168,51 @@ const styles = StyleSheet.create({
         paddingHorizontal: 8
     },
     cruz: {
-        color: "white"
+        color: "white",
+        backgroundColor: "black",
+        borderRadius: 15,
+        width: 20,
+        textAlign: "center",
+        marginBottom: 5,
+        marginRight: 5
     },
     image: {
         width: '97%',
         padding: 5,
         alignSelf: "center",
-        height: 400
+        height: 400,
+        borderRadius: 5,
+        marginBottom: 5
     },
     username: {
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginLeft: 5,
+        marginBottom: 5
+    },
+    textosPost: {
+        marginLeft: 5,
+        marginTop: 5,
+
+    },
+    usernamePost: {
+        fontWeight: "bold",
+    },
+    botonMeGusta: {
+        marginRight: 5,
+        color: "white",
+        backgroundColor: "black",
+        borderRadius: 10,
+        padding: 5,
+        paddingRight: 5,
+        textAlign: "center"
+    },
+    bloqueLikes: {
+        marginVertical: 5
+    },
+    parteDeArriba: {
+        display: "flex",
+        justifyContent: "space-between",
+        marginBottom: 5
     }
 })
 

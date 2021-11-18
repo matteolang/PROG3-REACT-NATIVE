@@ -44,14 +44,14 @@ class MiPerfil extends Component {
     render(){
         return (
             <View>
-        <Text>{this.state.usuarioActual.username}</Text>
-        <Text>Email: {this.props.dataUsuario.email}</Text>
+        <Text style={styles.textosPerfil}>Nombre de usuario:<Text style={styles.labels}> {this.state.usuarioActual.username}</Text></Text>
+        <Text style={styles.textosPerfil}>Email:<Text style={styles.labels}> {this.props.dataUsuario.email}</Text></Text>
 
-        <Text>Cantidad de posteos: {this.state.postsPropios.length}</Text>
+        <Text style={styles.textosPerfil}>Cantidad de posteos:<Text style={styles.labels}> {this.state.postsPropios.length}</Text></Text>
         <FlatList data={this.state.postsPropios} keyExtractor={ post => post.id} renderItem={ ({item}) => <Post postData={item} >{item.data.texto}</Post>}/>
 
-        <Text>Fecha de creacion del usuario: {this.props.dataUsuario.metadata.creationTime}</Text>
-        <Text>Ultimo inicio de sesión: {this.props.dataUsuario.metadata.lastSignInTime}</Text>
+        <Text style={styles.textosPerfil}>Fecha de creacion del usuario:<Text style={styles.labels}> {this.props.dataUsuario.metadata.creationTime}</Text></Text>
+        <Text style={styles.textosPerfil}>Ultimo inicio de sesión:<Text style={styles.labels}> {this.props.dataUsuario.metadata.lastSignInTime}</Text></Text>
 
        
         <TouchableOpacity style={styles.logout} onPress={()=>this.props.logout()}><Text>Log Out</Text></TouchableOpacity>
@@ -69,6 +69,14 @@ const styles = StyleSheet.create ({
         borderRadius: 5,
         padding: 5
 
+    },
+    textosPerfil: {
+        marginLeft: 5,
+        marginVertical: 5
+    },
+    labels: {
+        fontWeight: "bold",
+        marginLeft: 5
     }
 })
 
