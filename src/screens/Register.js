@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     field:{
-        borderColor: "grey",
+        borderColor: "#006DB5",
         paddingVertical: 15,
         borderWidth: 1,
         borderStyle: "solid",
@@ -92,14 +92,14 @@ const styles = StyleSheet.create({
         color: 'red'
     },
     boton: {
-        backgroundColor: "#28a745",
+        backgroundColor: "#006DB5",
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: "center",
         borderRadius: 4 ,
         borderWidth: 1,
         borderStyle: "solid",
-        borderColor: "#28a745",
+        borderColor: "#006DB5",
         marginLeft: 5,
         marginRight: 5,
         marginVertical: 15,

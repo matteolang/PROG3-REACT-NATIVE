@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     field:{
-        borderColor: "grey",
+        borderColor: "#006DB5",
         paddingVertical: 15,
         paddingBottom: 80,
         borderWidth: 1,
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         marginVertical: 15
     },
     boton: {
-        backgroundColor: "#28a745",
+        backgroundColor: "#006DB5",
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: "center",

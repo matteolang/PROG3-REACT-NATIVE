@@ -44,8 +44,8 @@ class Postform extends Component{
                 <MyCamera imagenCargada={(url) => this.imagenCargada(url)}/>
                 :
                 <View style={styles.container}>
-                    <TextInput style={styles.input} onChangeText={(text)=> this.setState({textoPost: text})} placeholder="Pone una descripcion" keyboardType="default" multiline/>
-                    <TouchableOpacity style={styles.boton} onPress={()=> this.submitPost()}><Text style={styles.textoBoton}>Postear</Text></TouchableOpacity>
+                    <TextInput style={styles.input} onChangeText={(text)=> this.setState({textoPost: text})} placeholder="Descripción..." keyboardType="default" multiline/>
+                    <TouchableOpacity style={styles.boton} onPress={()=> this.submitPost()}><Text style={styles.textoBoton}>Publicar</Text></TouchableOpacity>
                 </View>  
             
             }
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     input:{
-        borderColor: "grey",
+        borderColor: "#006DB5",
         paddingVertical: 15,
         borderWidth: 1,
         borderStyle: "solid",
@@ -84,14 +84,14 @@ const styles = StyleSheet.create({
         color: 'red'
     },
     boton: {
-        backgroundColor: "#28a745",
+        backgroundColor: "#006DB5",
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: "center",
         borderRadius: 4 ,
         borderWidth: 1,
         borderStyle: "solid",
-        borderColor: "#28a745"
+        borderColor: "#006DB5"
 
     },
     textoBoton: {

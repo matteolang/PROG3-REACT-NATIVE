@@ -17,6 +17,10 @@ class MyCamera extends Component{
     }
 
     componentDidMount(){
+        this.setState({
+            photo: "",
+            mostrarCamara: true
+        })
         Camera.requestCameraPermissionsAsync()
         .then(()=>{
             this.setState({permission: true})
@@ -67,18 +71,18 @@ class MyCamera extends Component{
             this.state.mostrarCamara ? 
             <View style={styles.container}>
              <Camera style={styles.camera} type={Camera.Constants.Type.back} ref={reference=> this.camera = reference }/>
-            <TouchableOpacity style={styles.boton} onPress={()=> this.sacarFoto()}><Text>Sacar Foto</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.boton} onPress={()=> this.sacarFoto()}><Text style={styles.sacarFoto}>Sacar Foto</Text></TouchableOpacity>
             </View>
              :
              <React.Fragment>
              <Image style={styles.image} source={{uri: this.state.photo}}/>
-             <View>
-                 <TouchableOpacity onPress={()=> this.eliminarFoto()}><Text>X</Text></TouchableOpacity>
-                 <TouchableOpacity onPress={()=> this.guardarFoto()}><Text>SI</Text></TouchableOpacity>
+             <View style={styles.containerSiNo}>
+                 <TouchableOpacity style={styles.botonNo} onPress={()=> this.eliminarFoto()}><Text style={styles.guardarBorrar}>Borrar</Text></TouchableOpacity>
+                 <TouchableOpacity style={styles.botonSi} onPress={()=> this.guardarFoto()}><Text style={styles.guardarBorrar}>Guardar</Text></TouchableOpacity>
              </View>
              </React.Fragment>
              :
-             <Text>No tiene permisos</Text> 
+             <Text style={styles.permisos}>No tiene permisos.</Text> 
               }
             </View>
         )
@@ -87,18 +91,52 @@ class MyCamera extends Component{
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        
+    },
+    guardarBorrar: {
+        color: "white"
+    },
+    botonNo: {
+        backgroundColor: "#006DB5",
+        borderRadius: 10,
+        textAlign: "center",
+        padding: 5
+    },
+    botonSi: {
+        backgroundColor: "#006DB5",
+        borderRadius: 10,
+        textAlign: "center",
+        padding: 5
+    },
+    containerSiNo: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        marginTop: 20
+    },
+    sacarFoto: {
+        color: "white"
     },
     camera: {
-        flex: 7
+        flex: 7,
     },
     boton: {
         flex: 1,
-        justifyContent: "center"
-        
+        justifyContent: "center",
+        textAlign: "center",
+        borderRadius: 5,
+        backgroundColor: "#006DB5",
+        marginTop: 20,
+        width: 100,
+        marginHorizontal: 140    
     },
     image: {
         flex: 1
+    },
+    permisos: {
+        textAlign: "center",
+        marginTop: 20
     }
 })
 

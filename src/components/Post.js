@@ -41,6 +41,7 @@ class Post extends Component{
     }
     
     darLike(){
+        console.log(auth.currentUser)
         db.collection('posts').doc(this.props.postData.id).update({
             likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
@@ -81,7 +82,7 @@ class Post extends Component{
     borrarPost(){
         if(auth.currentUser.email == this.props.postData.data.owner){
             this.setState({postPropio: true})
-            alert("Mira que estas borrando el post.")
+            alert("Eliminaste la publicación.")
             
             db.collection("posts").doc(this.props.postData.id).delete()
             .then(() => {
@@ -113,7 +114,7 @@ class Post extends Component{
              </TouchableOpacity> }
              
             {this.props.postData.data.likes.length == 0 ? <Text>No le gusta a nadie</Text>: 
-            this.props.postData.data.likes.length == 1 ? <Text>Solo le gusta a {this.props.postData.data.likes[0]}</Text> : <Text> Le gusta a {this.props.postData.data.likes[0]} y a {this.props.postData.data.likes.length - 1} personas más </Text>}
+            this.props.postData.data.likes.length == 1 ? <Text>Solo le gusta a <Text style={styles.username}>{this.props.postData.data.likes[0]}</Text></Text> : <Text> Le gusta a <Text style={styles.username}>{this.props.postData.data.likes[0]}</Text> y a <Text style={styles.username}>{this.props.postData.data.likes.length - 1} personas más</Text> </Text>}
             
             </Text>
              
@@ -123,15 +124,15 @@ class Post extends Component{
                     <TouchableOpacity style={styles.closeButton} onPress={()=> this.ocultarComentarios()}>
                         <Text style={styles.cruz}>x</Text>
                      </TouchableOpacity>                    
-                         <FlatList data={this.props.postData.data.comentarios} keyExtractor={ coment => coment.createdAt.toString()} renderItem={ ({item}) => <Text>{item.author}: {item.comentario}</Text>}/>           
-                        <TextInput placeholder="Comentá este post" keyboardType="default" multiline onChangeText={text => this.setState({comentario: text})} value={this.state.comentario}/>
-                        <TouchableOpacity onPress={()=>this.comentar()}><Text>Comentar</Text></TouchableOpacity>
+                         <FlatList data={this.props.postData.data.comentarios} keyExtractor={ coment => coment.createdAt.toString()} renderItem={ ({item}) => <Text><Text style={styles.username}>{item.author}:</Text> {item.comentario}</Text>}/>           
+                        <TextInput placeholder="Dejá tu comentario..." keyboardType="default" multiline onChangeText={text => this.setState({comentario: text})} value={this.state.comentario}/>
+                        <TouchableOpacity style={styles.botonMeGusta} onPress={()=>this.comentar()}><Text style={styles.botonMeGusta}>Publicar comentario</Text></TouchableOpacity>
                     </View>
 
             </Modal>
               :
                 <TouchableOpacity onPress={()=> this.showModal()}>
-                 {this.props.postData.data.comentarios ? this.props.postData.data.comentarios.length == 1 ? <Text style={styles.botonMeGusta}>Ver el único comentario</Text> : <Text style={styles.botonMeGusta}>Ver los {this.props.postData.data.comentarios.length} comentarios</Text>: <Text style={styles.botonMeGusta}>No hay comentarios aún</Text>}
+                 {this.props.postData.data.comentarios ? this.props.postData.data.comentarios.length == 1 ? <Text style={styles.botonMeGusta}>Ver el único comentario...</Text> : <Text style={styles.botonMeGusta}>Ver los {this.props.postData.data.comentarios.length} comentarios...</Text>: <Text style={styles.botonMeGusta}>No hay comentarios aún...</Text>}
                 </TouchableOpacity>
              }  
              </View>     
@@ -158,18 +159,18 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         boxShadow: "rgb(204 204 204) 0px 0px 9px 7px",
         marginBottom: 5,
-        marginTop: 5
+        marginTop: 5,
+        borderColor: "#006DB5"
     },
     closeButton: {
         padding: 5,
-        backgroundColor: "#dc3545", 
         alignSelf: "flex-end",
         borderRadius: 4,
         paddingHorizontal: 8
     },
     cruz: {
         color: "white",
-        backgroundColor: "black",
+        backgroundColor: "#006DB5",
         borderRadius: 15,
         width: 20,
         textAlign: "center",
@@ -187,7 +188,8 @@ const styles = StyleSheet.create({
     username: {
         fontWeight: "bold",
         marginLeft: 5,
-        marginBottom: 5
+        marginBottom: 5,
+        color: "#001F3F"
     },
     textosPost: {
         marginLeft: 5,
@@ -196,11 +198,12 @@ const styles = StyleSheet.create({
     },
     usernamePost: {
         fontWeight: "bold",
+        color: "#001F3F"
     },
     botonMeGusta: {
         marginRight: 5,
         color: "white",
-        backgroundColor: "black",
+        backgroundColor: "#006DB5",
         borderRadius: 10,
         padding: 5,
         paddingRight: 5,

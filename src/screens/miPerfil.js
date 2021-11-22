@@ -65,7 +65,7 @@ class MiPerfil extends Component {
 const styles = StyleSheet.create ({
     logout: {
         textAlign: "center",
-        backgroundColor: 'red',
+        backgroundColor: '#006DB5',
         borderRadius: 5,
         padding: 5
 
@@ -76,7 +76,8 @@ const styles = StyleSheet.create ({
     },
     labels: {
         fontWeight: "bold",
-        marginLeft: 5
+        marginLeft: 5,
+        color: "#001F3F"
     }
 })
 

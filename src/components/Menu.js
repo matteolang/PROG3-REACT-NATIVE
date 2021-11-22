@@ -1,6 +1,7 @@
 import React from "react";
 import { NavigationContainer} from "@react-navigation/native";
 import { createDrawerNavigator} from "@react-navigation/drawer";
+import { StyleSheet} from "react-native"
 
 import Home from "../screens/Home";
 import Login from "../screens/Login";
@@ -83,4 +84,13 @@ class Menu extends Component{
             }
     }
 }
+
+const styles = StyleSheet.create({
+    navigationContainer: {
+        backgroundColor: "#006DB5",
+        borderColor: "#006DB5"
+    }
+})
+
 export default Menu; 
+
