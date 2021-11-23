@@ -23,7 +23,7 @@ class Postform extends Component{
             likes: []
         })
         .then(()=>{
-            this.setState({textoPost: ""})
+            this.setState({textoPost: "", mostrarCamara: true})
             this.props.drawerProps.navigation.navigate('Home')
         }
         )

@@ -38,7 +38,7 @@ class Menu extends Component{
 
     register(email, pass){
         auth.createUserWithEmailAndPassword(email, pass)
-        .then(()=> console.log("registrado"))
+        .then(()=> this.navigation.navigate('Login'))
         .catch(error => this.setState({dataErrorRegister: error.message}))
     }
 

@@ -63,6 +63,10 @@ class MyCamera extends Component{
          .catch(error => console.log(error))
     }
 
+    componentWillUnmount(){
+        this.setState({photo: ''})
+    }
+
     render(){
 
         return(

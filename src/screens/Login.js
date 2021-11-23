@@ -23,7 +23,7 @@ class Login extends Component{
             style={styles.field}
             keyboardType='email-address'
             placeholder='email'
-            onChangeText={ text => this.setState({email: text})}
+            onChangeText={ (text) => this.setState({email: text})}
             />
             <TextInput
             style={styles.field}
@@ -33,9 +33,16 @@ class Login extends Component{
             onChangeText={ text => this.setState({password: text})}
             />
             <Text style={styles.error}>{this.props.error}</Text>
+            { this.state.email != "" && this.state.password != "" ?
             <TouchableOpacity onPress={() => this.props.login(this.state.email, this.state.password)} style={styles.boton}>
                 <Text style={styles.textoBoton}>Login</Text>
             </TouchableOpacity>
+            :
+            <TouchableOpacity style={styles.botonDesactivado}>
+                <Text style={styles.textoBoton}>Login</Text>
+            </TouchableOpacity>
+             }
+
             </View>
         )
     }
@@ -75,6 +82,19 @@ const styles = StyleSheet.create({
         marginRight: 5,
         marginVertical: 15,
 
+    },
+    botonDesactivado: {
+        backgroundColor: "grey",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 4 ,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "grey",
+        marginLeft: 5,
+        marginRight: 5,
+        marginVertical: 15,
     },
     textoBoton: {
         color: "white"

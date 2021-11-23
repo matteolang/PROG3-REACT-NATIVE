@@ -96,6 +96,15 @@ class Post extends Component{
        
     }
 
+    funcionComent(text){
+       
+       if(this.state.comentario == ""){
+         this.setState({botonHabilitado: true})
+       } else (
+        this.setState({botonHabilitado: false})
+       )
+    }
+
     render(){
         return(
             <View style={styles.contanier}>
@@ -126,8 +135,8 @@ class Post extends Component{
                         <Text style={styles.cruz}>x</Text>
                      </TouchableOpacity>                    
                          <FlatList data={this.props.postData.data.comentarios} keyExtractor={ coment => coment.createdAt.toString()} renderItem={ ({item}) => <Text><Text style={styles.username}>{item.author}:</Text> {item.comentario}</Text>}/>           
-                        <TextInput placeholder="Dejá tu comentario..." keyboardType="default" multiline onChangeText={text => this.setState({comentario: text, botonHabilitado: true})} value={this.state.comentario}/>
-                        {this.state.botonHabilitado? 
+                        <TextInput placeholder="Dejá tu comentario..." keyboardType="default" multiline onChangeText={text => this.setState({comentario: text})} value={this.state.comentario}/>
+                        {this.state.comentario != "" ? 
                         <TouchableOpacity style={styles.botonMeGusta} onPress={()=>this.comentar()}><Text style={styles.botonMeGusta}>Publicar comentario</Text></TouchableOpacity> : 
                         <TouchableOpacity style={styles.botonNo}><Text style={styles.botonNo}>Publicar comentario</Text></TouchableOpacity>}
 
@@ -222,7 +231,7 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     botonNo: {
-        botonMeGusta: {
+        
             marginRight: 5,
             color: "white",
             backgroundColor: "grey",
@@ -230,7 +239,7 @@ const styles = StyleSheet.create({
             padding: 5,
             paddingRight: 5,
             textAlign: "center"
-        },
+    
     }
 })
 
