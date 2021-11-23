@@ -13,7 +13,8 @@ class Post extends Component{
            comentario: "",
            usuarios: [],
            usuarioActual: [],
-           postPropio: false
+           postPropio: false, 
+           botonHabilitado: false
         }
     }
     componentDidMount(){
@@ -125,8 +126,11 @@ class Post extends Component{
                         <Text style={styles.cruz}>x</Text>
                      </TouchableOpacity>                    
                          <FlatList data={this.props.postData.data.comentarios} keyExtractor={ coment => coment.createdAt.toString()} renderItem={ ({item}) => <Text><Text style={styles.username}>{item.author}:</Text> {item.comentario}</Text>}/>           
-                        <TextInput placeholder="Dejá tu comentario..." keyboardType="default" multiline onChangeText={text => this.setState({comentario: text})} value={this.state.comentario}/>
-                        <TouchableOpacity style={styles.botonMeGusta} onPress={()=>this.comentar()}><Text style={styles.botonMeGusta}>Publicar comentario</Text></TouchableOpacity>
+                        <TextInput placeholder="Dejá tu comentario..." keyboardType="default" multiline onChangeText={text => this.setState({comentario: text, botonHabilitado: true})} value={this.state.comentario}/>
+                        {this.state.botonHabilitado? 
+                        <TouchableOpacity style={styles.botonMeGusta} onPress={()=>this.comentar()}><Text style={styles.botonMeGusta}>Publicar comentario</Text></TouchableOpacity> : 
+                        <TouchableOpacity style={styles.botonNo}><Text style={styles.botonNo}>Publicar comentario</Text></TouchableOpacity>}
+
                     </View>
 
             </Modal>
@@ -216,6 +220,17 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: "space-between",
         marginBottom: 5
+    },
+    botonNo: {
+        botonMeGusta: {
+            marginRight: 5,
+            color: "white",
+            backgroundColor: "grey",
+            borderRadius: 10,
+            padding: 5,
+            paddingRight: 5,
+            textAlign: "center"
+        },
     }
 })
 

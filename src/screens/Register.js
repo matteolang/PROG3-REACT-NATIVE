@@ -15,7 +15,15 @@ class Register extends Component{
             botonHabilitado: true    
         }
     }
-    
+    componentDidUpdate(){
+        if(this.state.email != ""  && this.state.password != "" && this.state.username != ""){
+            this.setState({botonHabilitado: true})
+        }
+        else{
+            this.setState({botonHabilitado: false})
+        }
+        
+    }
     
 
     submitUser(){
@@ -25,8 +33,9 @@ class Register extends Component{
             createdAt: Date.now(),
         })
         .then(()=>{
-            
+        
             this.props.register(this.state.email, this.state.password)
+            
             this.setState({email: "" ,username: "",password: ""})
             this.props.drawerProps.navigation.navigate('Login')
         }
