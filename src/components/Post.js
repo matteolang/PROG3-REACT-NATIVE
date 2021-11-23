@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useDebugValue } from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Modal, TextInput, FlatList, Image} from 'react-native';
 import { auth,db } from '../Firebase/config';
 import firebase from 'firebase';
@@ -42,9 +42,10 @@ class Post extends Component{
     }
     
     darLike(){
-        console.log(auth.currentUser)
+        let likeador = this.state.usuarios.filter(usuario => usuario.data.email == auth.currentUser.email)
+        
         db.collection('posts').doc(this.props.postData.id).update({
-            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+            likes: firebase.firestore.FieldValue.arrayUnion(likeador[0].data.username)
         })
         .then(()=>{
             this.setState({likes: this.props.postData.data.likes.length, myLike: true})
@@ -53,8 +54,9 @@ class Post extends Component{
         
     }
     sacarLike(){
+        let likeador = this.state.usuarios.filter(usuario => usuario.data.email == auth.currentUser.email)
         db.collection('posts').doc(this.props.postData.id).update({
-            likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+            likes: firebase.firestore.FieldValue.arrayRemove(likeador[0].data.username)
         })
         .then(()=>{
             this.setState({likes: this.props.postData.data.likes.length, myLike: false})
@@ -67,8 +69,10 @@ class Post extends Component{
         this.setState({showModal: false})
     }
     comentar(){
+        let comentarista = this.state.usuarios.filter(usuario => usuario.data.email == auth.currentUser.email)
+        console.log(comentarista);
         let unComentario = {
-            author: auth.currentUser.email,
+            author: comentarista[0].data.username,
             comentario: this.state.comentario,
             createdAt: Date.now()
         }
