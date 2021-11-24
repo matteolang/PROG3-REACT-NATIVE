@@ -42,10 +42,10 @@ class Post extends Component{
     }
     
     darLike(){
-        let likeador = this.state.usuarios.filter(usuario => usuario.data.email == auth.currentUser.email)
+       
         
         db.collection('posts').doc(this.props.postData.id).update({
-            likes: firebase.firestore.FieldValue.arrayUnion(likeador[0].data.username)
+            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
         .then(()=>{
             this.setState({likes: this.props.postData.data.likes.length, myLike: true})
@@ -54,9 +54,8 @@ class Post extends Component{
         
     }
     sacarLike(){
-        let likeador = this.state.usuarios.filter(usuario => usuario.data.email == auth.currentUser.email)
         db.collection('posts').doc(this.props.postData.id).update({
-            likes: firebase.firestore.FieldValue.arrayRemove(likeador[0].data.username)
+            likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
         })
         .then(()=>{
             this.setState({likes: this.props.postData.data.likes.length, myLike: false})
