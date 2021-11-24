@@ -148,7 +148,7 @@ class Post extends Component{
             </Modal>
               :
                 <TouchableOpacity onPress={()=> this.showModal()}>
-                 {this.props.postData.data.comentarios ? this.props.postData.data.comentarios.length == 1 ? <Text style={styles.botonMeGusta}>Ver el único comentario...</Text> : <Text style={styles.botonMeGusta}>Ver los {this.props.postData.data.comentarios.length} comentarios...</Text>: <Text style={styles.botonMeGusta}>No hay comentarios aún...</Text>}
+                 {this.props.postData.data.comentarios ? this.props.postData.data.comentarios.length == 1 ? <Text style={styles.botonMeGusta}>Ver el único comentario...</Text> : <Text style={styles.botonMeGusta}>Ver los {this.props.postData.data.comentarios.length} comentarios...</Text>: <Text style={styles.botonMeGusta}>Aún no hay comentarios. Sé el primero en opinar.</Text>}
                 </TouchableOpacity>
              }  
              </View>     

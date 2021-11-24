@@ -54,7 +54,7 @@ class MiPerfil extends Component {
         <Text style={styles.textosPerfil}>Ultimo inicio de sesión:<Text style={styles.labels}> {this.props.dataUsuario.metadata.lastSignInTime}</Text></Text>
 
        
-        <TouchableOpacity style={styles.logout} onPress={()=>this.props.logout()}><Text>Log Out</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.logout} onPress={()=>this.props.logout()}><Text style={styles.textOut}>Log Out</Text></TouchableOpacity>
         </View>
         )
     }
@@ -78,6 +78,9 @@ const styles = StyleSheet.create ({
         fontWeight: "bold",
         marginLeft: 5,
         color: "#001F3F"
+    },
+    textOut: {
+        color: "white"
     }
 })
 
