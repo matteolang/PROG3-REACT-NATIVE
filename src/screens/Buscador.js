@@ -27,17 +27,16 @@ class Buscador extends Component{
     }
 
     componentDidUpdate(){
-        db.collection('posts').onSnapshot(
-            docs =>{  
+       
                 let posteosBuscados = this.state.posteos.filter(post => post.data.owner.toLowerCase().includes(this.state.buscado.toLowerCase()) )
                 if(posteosBuscados.length > 0){
                 this.setState({posteosBuscados: posteosBuscados, resultados: true})
                 } else {
                     this.setState({resultados: false})
                 }
-            }
+            
 
-        )
+        
         
     }
  
@@ -56,7 +55,7 @@ class Buscador extends Component{
 
            {this.state.resultados ? 
            
-           <FlatList data={this.state.posteosBuscados} keyExtractor={ post => post.id} renderItem={ ({item}) => <Post postData={item}>{item.data.texto}</Post>}/>
+           <FlatList data={this.state.posteosBuscados} keyExtractor={ post => post.id} renderItem={ ({item}) => <Post postData={item}></Post>}/>
 
            : 
 
