@@ -69,7 +69,6 @@ class Post extends Component{
     }
     comentar(){
         let comentarista = this.state.usuarios.filter(usuario => usuario.data.email == auth.currentUser.email)
-        console.log(comentarista);
         let unComentario = {
             author: comentarista[0].data.username,
             comentario: this.state.comentario,
@@ -99,15 +98,6 @@ class Post extends Component{
        
     }
 
-    funcionComent(text){
-       
-       if(this.state.comentario == ""){
-         this.setState({botonHabilitado: true})
-       } else (
-        this.setState({botonHabilitado: false})
-       )
-    }
-
     render(){
         return(
             <View style={styles.contanier}>
@@ -126,8 +116,8 @@ class Post extends Component{
                  <Text style={styles.botonMeGusta}>No me gusta</Text>
              </TouchableOpacity> }
              
-            {this.props.postData.data.likes.length == 0 ? <Text>No le gusta a nadie</Text>: 
-            this.props.postData.data.likes.length == 1 ? <Text>Solo le gusta a <Text style={styles.username}>{this.props.postData.data.likes[0]}</Text></Text> : <Text> Le gusta a <Text style={styles.username}>{this.props.postData.data.likes[0]}</Text> y a <Text style={styles.username}>{this.props.postData.data.likes.length - 1} personas más</Text> </Text>}
+            {this.state.likes == 0 ? <Text>No le gusta a nadie</Text>: 
+            this.state.likes == 1 ? <Text>Solo le gusta a <Text style={styles.username}>{this.props.postData.data.likes[0]}</Text></Text> : <Text> Le gusta a <Text style={styles.username}>{this.props.postData.data.likes[0]}</Text> y a <Text style={styles.username}>{this.state.likes - 1} personas más</Text> </Text>}
             
             </Text>
              

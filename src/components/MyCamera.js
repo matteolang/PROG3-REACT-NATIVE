@@ -13,7 +13,6 @@ class MyCamera extends Component{
             photo: '',
             mostrarCamara: true
         }
-        this.camera
     }
 
     componentDidMount(){
